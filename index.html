@@ -1,89 +1,294 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabu tabu</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Happy Birthday!</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(ellipse at 50% 40%, #63266e 0%, transparent 65%),
+        linear-gradient(145deg, #100b27, #32103e, #130b2c);
+    color: white;
+}
+
+#background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    padding-top: max(35px, env(safe-area-inset-top));
+    padding-bottom: max(90px, env(safe-area-inset-bottom));
+    text-align: center;
+}
+
+.glow {
+    position: absolute;
+    width: 70vw;
+    height: 70vw;
+    max-width: 450px;
+    max-height: 450px;
+    background: #ec68ff;
+    filter: blur(100px);
+    opacity: 0.22;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* ТЕКСТ ЗВЕРХУ */
+h1 {
+    order: 1;
+    margin-bottom: 25px;
+    font-size: clamp(32px, 10vw, 58px);
+    font-weight: 900;
+    line-height: 1.15;
+    background: linear-gradient(90deg, #fff0a6, #ff91dc, #fff, #ffd76b);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0;
+    transform: translateY(-25px) scale(.85);
+    animation:
+        showText 1.5s ease 0.5s forwards,
+        shine 5s linear 2s infinite;
+    filter: drop-shadow(0 0 12px #ff8bea66);
+}
+
+@keyframes showText {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes shine {
+    to { background-position: 300% center; }
+}
+
+/* GIF +20% */
+.gif {
+    order: 2;
+    width: min(90vw, 50.4vh, 456px);
+    height: min(90vw, 50.4vh, 456px);
+    object-fit: contain;
+    animation: floating 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px #f18bff66);
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+}
+
+.subtitle {
+    order: 3;
+    margin-top: 20px;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: #eacaff;
+    opacity: 0;
+    animation: fadeIn 2s ease 2s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.gift {
+    position: absolute;
+    top: -60px;
+    animation: fall linear forwards;
+    user-select: none;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-60px) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% {
+        transform: translateY(110vh) rotate(600deg);
+        opacity: 0;
+    }
+}
+
+.star {
+    position: absolute;
+    color: #ffe9a9;
+    animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: .2; transform: scale(.7); }
+    50% { opacity: 1; transform: scale(1.3); }
+}
+
+.music-btn {
+    position: absolute;
+    bottom: max(25px, env(safe-area-inset-bottom));
+    z-index: 5;
+    border: 1px solid #ffffff55;
+    background: #ffffff20;
+    backdrop-filter: blur(12px);
+    color: white;
+    border-radius: 50px;
+    padding: 14px 27px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.music-btn:active {
+    transform: scale(.95);
+}
+
+@media (max-height: 550px) {
+    .gif {
+        width: min(54vw, 54vh);
+        height: min(54vw, 54vh);
+    }
+
+    h1 {
+        margin-bottom: 8px;
+        font-size: 30px;
+    }
+
+    .subtitle {
+        margin-top: 5px;
+    }
+}
+</style>
 </head>
 
-<body id="body">
-    <div class="slide_menu">
-        <div class="slide_menu_header">
-            <h1>Tabu tabu</h1>
-        </div>
-        <ul class="slide_menu_main">
-            <li class="slide_menu_note beta"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>saved</li>
-            <li class="slide_menu_note beta"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-type"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 13v-1h6v1"/><path d="M12 12v6"/><path d="M11 18h2"/></svg>note</li>
-            <li class="slide_menu_note beta"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>calculator</li>
-        </ul>
-    </div>
-    <div class="user_menu">
-        <div class="user_menu_header">
-            <img draggable="false" src="https://placehold.co/100" alt="User profile picture" class="user_menu_profile_picture">
-            <div class="user_menu_profile_info">
-                <p>Hello,</p>
-                <p class="user_name"></p>
-            </div>
-        </div>
-        <ul class="user_menu_main">
-            <li class="user_menu_profile beta">Profile <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-search"><circle cx="10" cy="8" r="5"/><path d="M2 21a8 8 0 0 1 10.434-7.62"/><circle cx="18" cy="18" r="3"/><path d="m22 22-1.9-1.9"/></svg></li>
-            <li class="user_menu_settings beta">Settings <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></li>
-            <li class="user_menu_logout beta">Logout <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg></li>
-        </ul>
-    </div>
-    <main class="main">
-        <!-- <div class="window_tab">
-            <div class="window_tab_border">
-                <div class="window_navbar">
-                    <h2 class="window_navbar_title">Tab 1</h2>
-                    <div class="navbar_btn">
-                        <span class="navbar_btn_hide">-</span>
-                        <span class="navbar_btn_full">*</span>
-                        <span class="navbar_btn_close">x</span>
-                </div>
-            </div>
-            <div class="window_content">
-                    
-            </div>
-        </div>
-        <div class="window_tab">
-            <div class="window_tab_border">
-                <div class="window_navbar">
-                    <h2 class="window_navbar_title">Tab 2</h2>
-                    <div class="navbar_btn">
-                        <span class="navbar_btn_hide">-</span>
-                        <span class="navbar_btn_full">*</span>
-                        <span class="navbar_btn_close">x</span>
-                </div>
-            </div>
-            <div class="window_content"></div>
-        </div>
-        <div class="window_tab">
-            <div class="window_tab_border">
-                <div class="window_navbar">
-                    <h2 class="window_navbar_title">Tab 3</h2>
-                    <div class="navbar_btn">
-                        <span class="navbar_btn_hide">-</span>
-                        <span class="navbar_btn_full">*</span>
-                        <span class="navbar_btn_close">x</span>
-                </div>
-            </div>
-            <div class="window_content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem eligendi repellendus asperiores iusto tenetur fugiat perferendis provident iste nesciunt quisquam ab dolores, saepe ullam rem. Officia porro reiciendis dolor numquam?
-                Voluptates necessitatibus ipsa ceat nobis quae adipisci illo ex quo aspernatur voluptates sequi, praesentium modi nesciunt assumenda impedit molestiae necessitatibus? Eos quibusdam adipisci aspernatur rerum deleniti? Nam assumenda dolore accusamus maiores veniam!
-            </div>
-        </div> -->
-        
-    </main>
+<body>
 
-    <footer class="footer_menu">
-        <div class="menu_slide"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></div>
-        <div class="footer_container"></div>
-        <div class="menu_user"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-user-round"><path d="M18 21a6 6 0 0 0-12 0"/><circle cx="12" cy="11" r="4"/><rect width="18" height="18" x="3" y="3" rx="2"/></svg></div>
-    </footer>
-    <script src="main.js"></script>
+<div id="background"></div>
+
+<div class="container">
+    <div class="glow"></div>
+
+    <h1>Happy birthday</h1>
+
+    <!-- GIF -->
+    <img class="gif"
+         src="birthday.gif"
+         alt="Birthday GIF">
+
+    <div class="subtitle">
+        ✨ YOUR SPECIAL DAY ✨
+    </div>
+
+    <button class="music-btn" id="musicBtn">
+        🔊 PLAY MUSIC
+    </button>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop autoplay preload="auto">
+    <source src="happy-happy-happy-song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("music");
+const btn = document.getElementById("musicBtn");
+
+async function playMusic() {
+    try {
+        await music.play();
+        btn.textContent = "🔊 MUSIC ON";
+    } catch (error) {
+        btn.textContent = "🎵 TAP TO PLAY";
+    }
+}
+
+btn.addEventListener("click", async () => {
+    if (music.paused) {
+        await playMusic();
+    } else {
+        music.pause();
+        btn.textContent = "🎵 PLAY MUSIC";
+    }
+});
+
+document.addEventListener("touchstart", () => {
+    if (music.paused) playMusic();
+}, { once: true });
+
+document.addEventListener("click", () => {
+    if (music.paused) playMusic();
+}, { once: true });
+
+window.addEventListener("load", playMusic);
+
+// Подарунки
+const background = document.getElementById("background");
+
+const emojis = [
+    "🎁", "🎀", "✨", "🎊",
+    "💝", "⭐", "🎈", "🩷"
+];
+
+function createGift() {
+    const gift = document.createElement("div");
+
+    gift.className = "gift";
+    gift.textContent =
+        emojis[Math.floor(Math.random() * emojis.length)];
+
+    gift.style.left = Math.random() * 100 + "vw";
+    gift.style.fontSize = (18 + Math.random() * 23) + "px";
+    gift.style.animationDuration = (5 + Math.random() * 6) + "s";
+
+    background.appendChild(gift);
+
+    setTimeout(() => gift.remove(), 12000);
+}
+
+setInterval(createGift, 350);
+
+// Зірочки
+for (let i = 0; i < 25; i++) {
+    const star = document.createElement("div");
+
+    star.className = "star";
+    star.textContent = "✦";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.fontSize = (8 + Math.random() * 14) + "px";
+    star.style.animationDelay = Math.random() * 3 + "s";
+
+    background.appendChild(star);
+}
+</script>
+
 </body>
-
 </html>
